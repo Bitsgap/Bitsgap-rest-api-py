@@ -20,6 +20,7 @@ PATH_ORDERS_HISTORY = "orders/history"
 PATH_ORDERS_OPEN = "orders/open"
 PATH_ORDERS_ADD = "orders/add"
 PATH_ORDERS_CANCEL = "orders/cancel"
+PATH_KEYS = 'keys'
 
 # HTTP request timeout in seconds
 TIMEOUT = 10.0
@@ -378,6 +379,42 @@ class BitsgapClient(BitsgapBaseClient):
         return self._post(self.url_for(PATH_OHLC), params={'market': market, 'pair': symbol, 'start': start, 'end': end})
 
     # real trading
+
+    def keys(self):
+        """
+        # Return user API keys and key status
+
+        # Request
+        POST /api/v1/keys
+        POST https://bitsgap.com/api/v1/keys
+
+        # Params
+        None
+
+        # Response
+        {
+          "status": "ok",
+          "time": 1551241472,
+          "data": {
+            "zb.com": {
+              "disable": true,
+              "uts": 1551692245,
+              "key": "dxxxxxx8-9xx6-4xxd-bxxe-exxxxxxxxxxe",
+              "check": true
+            },
+            "kraken": {
+              "bad": true,
+              "message": "Invalid API-key: Invalid secret key",
+              "uts": 1551768352,
+              "key": "123",
+              "check": true
+            }
+          }
+        }
+        """
+        return self._post(self.url_for(PATH_BALANCE))
+
+
     def balance(self):
         """
         # Return balance for selected user for all markets, where user added API keys
@@ -598,9 +635,9 @@ class BitsgapClient(BitsgapBaseClient):
         }
         return self._post(self.url_for(PATH_ORDERS_ADD), params=params)
 
-    def orders_cancel(self, market, pid):
+    def orders_cancel(self, market, id):
         """
-        # Cancel real market order by pid
+        # Cancel real market order by id
 
         # Request
         POST /api/v1/orders/cancel
@@ -608,7 +645,7 @@ class BitsgapClient(BitsgapBaseClient):
 
         # Params
         market - market name
-        pid - market order ID
+        id - order ID
 
         # Response
         {
@@ -630,7 +667,7 @@ class BitsgapClient(BitsgapBaseClient):
           }
         }
         """
-        return self._post(self.url_for(PATH_ORDERS_CANCEL), params={'market': market, 'pid': pid})
+        return self._post(self.url_for(PATH_ORDERS_CANCEL), params={'market': market, 'id': id})
 
     # demo trading
     def demo_balance(self):
@@ -772,7 +809,19 @@ class BitsgapClient(BitsgapBaseClient):
 
         # Response
         {
-            "status": "ok"
+          "status": "ok",
+          "time": 1551855974,
+          "data": {
+            "price": 0.02,
+            "amount_init": 10,
+            "guid": "caxxxxxxxxxxxxxxxxxxxxxxxxxxxx1d",
+            "amount": 10,
+            "state": "opened",
+            "type": "limit",
+            "pair": "ADA_USD",
+            "side": "buy",
+            "uts": 1551855974.5700731
+          }
         }
         """
         return self._post(self.url_for(PATH_ORDERS_ADD, 'demo'), params={'market': market,
@@ -782,7 +831,7 @@ class BitsgapClient(BitsgapBaseClient):
                                                                          'side': side,
                                                                          'type': order_type})
 
-    def demo_orders_cancel(self, market, pid ):
+    def demo_orders_cancel(self, market, id):
         """
         # Return result of cancel order
 
@@ -792,11 +841,22 @@ class BitsgapClient(BitsgapBaseClient):
 
         # Params
         market - market name
-        guid - Bitsgap order ID
+        id - order ID
 
         # Response
         {
-            "status": "ok"
+          "status": "ok",
+          "time": 1551861893,
+          "data": {
+            "amount": 10,
+            "price": 0.02,
+            "uts": 1551861893.0678823,
+            "side": "buy",
+            "state": "closed",
+            "amount_init": 10,
+            "pair": "ADA_USD",
+            "guid": "4dxxxxxxxxxxxxxxxxxxxxxxxxxxxc1"
+          }
         }
         """
-        return self._post(self.url_for(PATH_ORDERS_CANCEL, 'demo'), params={'market': market, 'pid': pid})
+        return self._post(self.url_for(PATH_ORDERS_CANCEL, 'demo'), params={'market': market, 'id': id})
