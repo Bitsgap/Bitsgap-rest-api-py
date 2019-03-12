@@ -23,17 +23,19 @@ class TestRestRecentTrades(TestCase):
             self.assertTrue(result['status'] == 'ok')
             self.assertIn('data', result)
 
-            data = result['data']
 
+            data = result['data']
             self.assertIsNotNone(data)
+            self.assertTrue(len(data) > 0)
+
             # check time field
-            self.assertIn('u', data)
+            self.assertIn('u', data[0])
             # check amount field
-            self.assertIn('am', data)
+            self.assertIn('am', data[0])
             # check side field
-            self.assertIn('s', data)
+            self.assertIn('s', data[0])
             # check price field
-            self.assertIn('p', data)
+            self.assertIn('p', data[0])
 
             await asyncio.sleep(1)
 
