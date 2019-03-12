@@ -20,6 +20,7 @@ PATH_ORDERS_HISTORY = "orders/history"
 PATH_ORDERS_OPEN = "orders/open"
 PATH_ORDERS_ADD = "orders/add"
 PATH_ORDERS_CANCEL = "orders/cancel"
+PATH_ORDERS_MOVE = "orders/move"
 PATH_KEYS = 'keys'
 
 # HTTP request timeout in seconds
@@ -394,20 +395,23 @@ class BitsgapClient(BitsgapBaseClient):
         # Response
         {
           "status": "ok",
-          "time": 1551241472,
+          "time": 1552296397,
           "data": {
             "zb.com": {
-              "disable": true,
-              "uts": 1551692245,
-              "key": "dxxxxxx8-9xx6-4xxd-bxxe-exxxxxxxxxxe",
-              "check": true
+              "key": "dfxxxxb8-9xx6-4xxd-bxxe-efxxxxxxxx8e",
+              "status": "disabled",
+              "uts": 1551692245
             },
-            "kraken": {
-              "bad": true,
-              "message": "Invalid API-key: Invalid secret key",
-              "uts": 1551768352,
-              "key": "123",
-              "check": true
+            "exmo": {
+              "key": "K-c1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx50",
+              "status": "active",
+              "uts": 1552293501
+            },
+            "kucoin": {
+              "key": "5cxxxxxxxxxxxxxxxxxxxx12",
+              "status": "incorrect",
+              "uts": 1552295796,
+              "message": "Invalid API-key: KC-API-KEY not exists"
             }
           }
         }
@@ -669,6 +673,25 @@ class BitsgapClient(BitsgapBaseClient):
         """
         return self._post(self.url_for(PATH_ORDERS_CANCEL), params={'market': market, 'id': id})
 
+    def orders_move(self, market, id, price):
+        """
+        # Move real market order by id to new price
+        # If market dosn't support move action order will be cancelled and placed with new price
+
+        # Request
+        POST /api/v1/orders/move
+        POST https://bitsgap.com/api/v1/orders/move
+
+        # Params
+        market - market name
+        id - order ID
+        price - new price value
+
+        # Response
+
+        """
+        return self._post(self.url_for(PATH_ORDERS_MOVE), params={'market': market, 'id': id, 'price': price})
+
     # demo trading
     def demo_balance(self):
         """
@@ -860,3 +883,20 @@ class BitsgapClient(BitsgapBaseClient):
         }
         """
         return self._post(self.url_for(PATH_ORDERS_CANCEL, 'demo'), params={'market': market, 'id': id})
+
+    def demo_orders_move(self, market, id, price):
+        """
+        # Return result of move order
+
+        # Request
+        POST /api/v1/demo/orders/move
+        POST https://bitsgap.com/api/v1/demo/orders/move
+
+        # Params
+        market - market name
+        id - order ID
+        price - new order price
+
+        # Response
+        """
+        return self._post(self.url_for(PATH_ORDERS_MOVE, 'demo'), params={'market': market, 'id': id, 'price': price})
