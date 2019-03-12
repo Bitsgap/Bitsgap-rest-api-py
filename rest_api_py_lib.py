@@ -7,13 +7,15 @@ import logging
 VERSION = 'v1'
 BASE_URL = 'https://bitsgap.com/api'
 
+# market data
 PATH_SYMBOLS = "markets"
 PATH_LAST_PRICE = "last-price"
-PATH_TICKER_ORDERBOOK = "tickers/order-book"
-PATH_TICKER_TRANSACTIONS = "tickers/transactions"
 PATH_ORDERBOOK = "order-book"
 PATH_RECENT_TRADES = "recent-trades"
 PATH_OHLC = "ohlc"
+
+#user data
+PATH_KEYS = 'keys'
 PATH_BALANCE = "balance"
 PATH_MESSAGES = "messages"
 PATH_ORDERS_HISTORY = "orders/history"
@@ -21,7 +23,6 @@ PATH_ORDERS_OPEN = "orders/open"
 PATH_ORDERS_ADD = "orders/add"
 PATH_ORDERS_CANCEL = "orders/cancel"
 PATH_ORDERS_MOVE = "orders/move"
-PATH_KEYS = 'keys'
 
 # HTTP request timeout in seconds
 TIMEOUT = 10.0
@@ -80,9 +81,7 @@ class BitsgapBaseClient(object):
 
 class BitsgapClient(BitsgapBaseClient):
 
-    """
-    Client for the Bitsgap API.
-    """
+    """ Client for the Bitsgap API. """
     def markets(self):
         """
         POST /api/v1/markets
@@ -145,120 +144,6 @@ class BitsgapClient(BitsgapBaseClient):
         }
         """
         return self._post(self.url_for(PATH_LAST_PRICE), params={'market': market, 'pair': symbol})
-
-    def ticker_orderbook(self, market, symbol, start, end):
-        """
-        # Return orderbook for selected market and pair in selected interval
-        # Maximum interval 72 hours
-
-        # Request
-        POST /api/v1/tickers/order-book
-        POST https://bitsgap.com/api/v1/tickers/order-book
-
-        # Params
-        market - market name
-        pair - Bitsgap pair name
-        start - start time of the period
-        end - end time of the period
-
-        # Response
-        {
-          "status": "ok",
-          "time": 1549264229,
-          "data": {
-            "market": "kraken",
-            "pair": "BTC_USD",
-            "tickets": [
-              [
-                1549264202,
-                [
-                  3418,
-                  3417.7
-                ]
-              ],
-              [
-                1549264208,
-                [
-                  3418,
-                  3417.8
-                ]
-              ]
-            ]
-          }
-        }
-        """
-        return self._post(self.url_for(PATH_TICKER_ORDERBOOK), params={'market': market, 'pair': symbol, 'start': start, 'end': end})
-
-    def ticker_transactions(self, market, symbol, start, end):
-        """
-        # Return last price for selected market and pair
-
-        # Request
-        POST /api/v1/tickers/transactions
-        POST https://bitsgap.com/api/v1/tickers/transactions
-
-        # Params
-        market - market name
-        pair - Bitsgap pair name
-        start - start time of the period
-        end - end time of the period
-
-        # Response
-        {
-          "status": "ok",
-          "time": 1551198964,
-          "data": {
-            "market": "kraken",
-            "pair": "ADA_USD",
-            "tickets": [
-              [
-                1551196682.3633, // transaction timestamp
-                {
-                  "pr": 0.0428,  // price
-                  "s": "buy",    // side "buy" or "sell"
-                  "am": "1200.00000000" // amount
-                }
-              ],
-              [
-                1551197121.2385,
-                {
-                  "pr": 0.042795,
-                  "s": "buy",
-                  "am": "8.00000000"
-                }
-              ],
-              [
-                1551197224.9333,
-                {
-                  "pr": 0.042715,
-                  "s": "sell",
-                  "am": "585.27449373"
-                }
-              ],
-              [
-                1551197331.7342,
-                {
-                  "pr": 0.042606,
-                  "s": "sell",
-                  "am": "1408.25235882"
-                }
-              ],
-              [
-                1551197501.9362,
-                {
-                  "pr": 0.042593,
-                  "s": "buy",
-                  "am": "7333.17200000"
-                }
-              ]
-            ]
-          }
-        }
-        """
-        return self._post(self.url_for(PATH_TICKER_TRANSACTIONS), params={'market': market,
-                                                                          'pair': symbol,
-                                                                          'start': start,
-                                                                          'end': end})
 
     def orderbook(self, market, symbol):
         """
@@ -379,7 +264,8 @@ class BitsgapClient(BitsgapBaseClient):
         """
         return self._post(self.url_for(PATH_OHLC), params={'market': market, 'pair': symbol, 'start': start, 'end': end})
 
-    # real trading
+    # real market
+    # trading methods
 
     def keys(self):
         """
@@ -416,8 +302,7 @@ class BitsgapClient(BitsgapBaseClient):
           }
         }
         """
-        return self._post(self.url_for(PATH_BALANCE))
-
+        return self._post(self.url_for(PATH_KEYS))
 
     def balance(self):
         """
