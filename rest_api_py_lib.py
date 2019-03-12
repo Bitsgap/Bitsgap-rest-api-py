@@ -785,3 +785,41 @@ class BitsgapClient(BitsgapBaseClient):
         # Response
         """
         return self._post(self.url_for(PATH_ORDERS_MOVE, 'demo'), params={'market': market, 'id': id, 'price': price})
+
+
+    def demo_keys(self):
+        """
+        # Return user API keys and key status
+
+        # Request
+        POST /api/v1/keys
+        POST https://bitsgap.com/api/v1/keys
+
+        # Params
+        None
+
+        # Response
+        {
+          "status": "ok",
+          "time": 1552296397,
+          "data": {
+            "zb.com": {
+              "key": "dfxxxxb8-9xx6-4xxd-bxxe-efxxxxxxxx8e",
+              "status": "disabled",
+              "uts": 1551692245
+            },
+            "exmo": {
+              "key": "K-c1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx50",
+              "status": "active",
+              "uts": 1552293501
+            },
+            "kucoin": {
+              "key": "5cxxxxxxxxxxxxxxxxxxxx12",
+              "status": "incorrect",
+              "uts": 1552295796,
+              "message": "Invalid API-key: KC-API-KEY not exists"
+            }
+          }
+        }
+        """
+        return self._post(self.url_for(PATH_KEYS, 'demo'))
