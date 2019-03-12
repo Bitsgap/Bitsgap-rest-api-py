@@ -5,7 +5,7 @@ from rest_api_py_lib import BitsgapClient
 from tests.keys import public_key,private_key
 
 
-class TestRestPlaceOrderDemo(TestCase):
+class TestRestOrderbook(TestCase):
 
     """ Get orderbook for selected market and pair """
     def test_orderbook_valid_data(self):
