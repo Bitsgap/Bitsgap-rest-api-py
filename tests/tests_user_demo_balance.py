@@ -1,9 +1,6 @@
 import asyncio
 import logging
 from unittest import TestCase
-
-import time
-
 from rest_api_py_lib import BitsgapClient
 from tests.keys import public_key,private_key
 
