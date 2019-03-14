@@ -42,6 +42,8 @@ class TestRestUserOrdersMove(TestCase):
             new_price = float(old_price) * 0.999
 
             result_move = lib.orders_move(market, id, str(new_price))
+            
+            logging.debug(result_move)
 
             self.assertIn('status', result_move)
             self.assertTrue(result_move['status'] == 'ok')
@@ -104,6 +106,8 @@ class TestRestUserOrdersMove(TestCase):
             new_price = float(old_price) * 0.999
 
             result_move = lib.orders_move(market, id, str(new_price))
+            
+            logging.debug(result_move)
 
             self.assertIn('status', result_move)
             self.assertTrue(result_move['status'] == 'error')
@@ -131,6 +135,8 @@ class TestRestUserOrdersMove(TestCase):
             new_price = '0.01'
 
             result_move = lib.orders_move(market, id, new_price)
+            
+            logging.debug(result_move)
 
             self.assertIn('status', result_move)
             self.assertTrue(result_move['status'] == 'error')
@@ -158,6 +164,8 @@ class TestRestUserOrdersMove(TestCase):
             new_price = '0.01'
 
             result_move = lib.orders_move(market, id, new_price)
+            
+            logging.debug(result_move)
 
             self.assertIn('status', result_move)
             self.assertTrue(result_move['status'] == 'error')
