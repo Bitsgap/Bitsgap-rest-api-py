@@ -39,6 +39,8 @@ class TestRestUserOrdersCancel(TestCase):
             self.assertIsNotNone(id)
 
             result_cancel = lib.orders_cancel(market, id)
+            
+            logging.debug(result_cancel)
 
             self.assertIn('status', result_cancel)
             self.assertTrue(result_cancel['status'] == 'ok')
@@ -97,6 +99,8 @@ class TestRestUserOrdersCancel(TestCase):
             self.assertIsNotNone(id)
 
             result_cancel = lib.orders_cancel(market, id)
+            
+            logging.debug(result_cancel)
 
             self.assertIn('status', result_cancel)
             self.assertTrue(result_cancel['status'] == 'error')
@@ -121,6 +125,8 @@ class TestRestUserOrdersCancel(TestCase):
             lib = BitsgapClient(public_key, private_key)
 
             result_cancel = lib.orders_cancel(market, id)
+            
+            logging.debug(result_cancel)
 
             self.assertIn('status', result_cancel)
             self.assertTrue(result_cancel['status'] == 'error')
@@ -145,6 +151,8 @@ class TestRestUserOrdersCancel(TestCase):
             lib = BitsgapClient(public_key, private_key)
 
             result_cancel = lib.orders_cancel(market, id)
+            
+            logging.debug(result_cancel)
 
             self.assertIn('status', result_cancel)
             self.assertTrue(result_cancel['status'] == 'error')
