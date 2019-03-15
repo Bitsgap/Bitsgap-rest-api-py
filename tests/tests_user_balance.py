@@ -66,7 +66,7 @@ class TestRestUserBalance(TestCase):
             self.assertTrue(len(data) > 0)
 
             # check fields
-            self.assertIn('balance', data)
+            self.assertIn('available', data)
             self.assertIn('total', data)
             self.assertIn('uts', data)
 
