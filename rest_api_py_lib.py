@@ -350,7 +350,43 @@ class BitsgapClient(BitsgapBaseClient):
         }
         """
         return self._post(self.url_for(PATH_BALANCE))
+    
+    def market_balance(self, market):
+        """
+        # Return user balance for specified market
 
+        # Request
+        POST /api/v1/balance
+        POST https://bitsgap.com/api/v1/balance
+
+        # Params
+        market(optional) - market name
+
+        # Response
+        {
+          "status": "ok",
+          "time": 1552628607,
+          "data": {
+            "total": {
+              "BSV": 0.40738088,
+              "EDR": 600,
+              "XNK": 1034.48275862,
+              "BTC": 0.00526984,
+              "USD": 23.76593269
+            },
+            "available": {
+              "BSV": 0.40738088,
+              "EDR": 600,
+              "XNK": 1034.48275862,
+              "BTC": 0.00526984,
+              "USD": 23.76593269
+            },
+            "uts": 1552628607.1825855
+          }
+        }
+        """
+        return self._post(self.url_for(PATH_BALANCE), params={'market': market})
+    
     def messages(self):
         """
         # Return last 100 trade messages for selected user
