@@ -10,7 +10,7 @@ BASE_URL = 'https://bitsgap.com/api'
 # market data
 PATH_SYMBOLS = "markets"
 PATH_LAST_PRICE = "last-price"
-PATH_ORDERBOOK = "orderbook"
+PATH_ORDERBOOK = "order-book"
 PATH_RECENT_TRADES = "recent-trades"
 PATH_OHLC = "ohlc"
 
