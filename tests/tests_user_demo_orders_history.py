@@ -11,7 +11,7 @@ class TestRestUserDemoOrdersHistory(TestCase):
     def test_user_demo_history_orders_valid_data(self):
         async def run_test():
 
-            market = 'bittrex'
+            market = 'okex'
 
             lib = BitsgapClient(public_key, private_key)
 

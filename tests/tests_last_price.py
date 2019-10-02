@@ -11,8 +11,8 @@ class TestRestLastPrice(TestCase):
     def test_last_price_valid_data(self):
         async def run_test():
 
-            market = 'bittrex'
-            pair = 'EDR_USD'
+            market = 'okex'
+            pair = 'ETH_BTC'
 
             lib = BitsgapClient(public_key, private_key)
 
@@ -45,7 +45,7 @@ class TestRestLastPrice(TestCase):
         async def run_test():
 
             market = 'no_market'
-            pair = 'EDR_USD'
+            pair = 'ETH_BTC'
 
             lib = BitsgapClient(public_key, private_key)
 
@@ -72,7 +72,7 @@ class TestRestLastPrice(TestCase):
     def test_last_price_invalid_pair(self):
         async def run_test():
 
-            market = 'bittrex'
+            market = 'okex'
             pair = 'no_pair'
 
             lib = BitsgapClient(public_key, private_key)

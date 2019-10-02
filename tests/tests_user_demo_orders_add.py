@@ -11,11 +11,11 @@ class TestRestUserDemoOrdersAdd(TestCase):
     def test_user_demo_orders_add_valid_data(self):
         async def run_test():
 
-            market = 'bittrex'
-            pair = 'EDR_USD'
-            price = '0.250'
-            amount = '150'
-            side = 'sell'
+            market = 'okex'
+            pair = 'ETH_BTC'
+            price = '0.015'
+            amount = '1'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -40,6 +40,9 @@ class TestRestUserDemoOrdersAdd(TestCase):
             self.assertIn('type', data)
             self.assertIn('side', data)
             self.assertIn('uts', data)
+            self.assertIn('state', data)
+            if 'state' in data:
+                self.assertIn(data['state'], 'opened')
 
             await asyncio.sleep(1)
 
@@ -55,10 +58,10 @@ class TestRestUserDemoOrdersAdd(TestCase):
         async def run_test():
 
             market = 'no_market'
-            pair = 'EDR_USD'
-            price = '0.250'
-            amount = '150'
-            side = 'sell'
+            pair = 'ETH_BTC'
+            price = '0.015'
+            amount = '0.1'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -82,14 +85,14 @@ class TestRestUserDemoOrdersAdd(TestCase):
         event_loop.run_until_complete(coro())
         event_loop.close()
 
-    """ Invalid market """
+    """ Invalid pair """
     def test_user_demo_orders_add_invalid_pair(self):
         async def run_test():
-            market = 'bittrex'
+            market = 'okex'
             pair = 'no_pair'
-            price = '0.250'
-            amount = '150'
-            side = 'sell'
+            price = '0.015'
+            amount = '0.1'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -116,10 +119,10 @@ class TestRestUserDemoOrdersAdd(TestCase):
     """ Invalid side """
     def test_user_demo_orders_add_invalid_side(self):
         async def run_test():
-            market = 'bittrex'
-            pair = 'EDR_USD'
-            price = '0.250'
-            amount = '150'
+            market = 'okex'
+            pair = 'ETH_BTC'
+            price = '0.015'
+            amount = '0.1'
             side = 'invalid'
             ord_type = 'limit'
 
@@ -147,11 +150,11 @@ class TestRestUserDemoOrdersAdd(TestCase):
     """ Invalid type """
     def test_user_demo_orders_add_invalid_type(self):
         async def run_test():
-            market = 'bittrex'
-            pair = 'EDR_USD'
-            price = '0.250'
-            amount = '150'
-            side = 'sell'
+            market = 'okex'
+            pair = 'ETH_BTC'
+            price = '0.015'
+            amount = '0.1'
+            side = 'buy'
             ord_type = 'invalid'
 
             lib = BitsgapClient(public_key, private_key)
@@ -179,11 +182,11 @@ class TestRestUserDemoOrdersAdd(TestCase):
 
     def test_user_demo_orders_add_invalid_price_format(self):
         async def run_test():
-            market = 'bittrex'
-            pair = 'EDR_USD'
+            market = 'okex'
+            pair = 'ETH_BTC'
             price = '0*250'
-            amount = '150'
-            side = 'sell'
+            amount = '0.1'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -211,10 +214,10 @@ class TestRestUserDemoOrdersAdd(TestCase):
 
     def test_user_demo_orders_add_invalid_price_zero(self):
         async def run_test():
-            market = 'bittrex'
-            pair = 'EDR_USD'
+            market = 'okex'
+            pair = 'ETH_BTC'
             price = '0'
-            amount = '150'
+            amount = '0.1'
             side = 'buy'
             ord_type = 'limit'
 
@@ -224,11 +227,25 @@ class TestRestUserDemoOrdersAdd(TestCase):
 
             logging.debug(result)
 
-            self.assertIn('time', result)
             self.assertIn('status', result)
-            self.assertTrue(result['status'] == 'error')
+            self.assertTrue(result['status'] == 'ok')
+            self.assertIn('time', result)
+            self.assertIn('data', result)
 
-            self.assertIn('message', result)
+            data = result['data']
+            self.assertIsNotNone(data)
+            # check fields
+            self.assertIn('id', data)
+            self.assertIn('price', data)
+            self.assertIn('amount', data)
+            self.assertIn('state', data)
+            self.assertIn('pair', data)
+            self.assertIn('type', data)
+            self.assertIn('side', data)
+            self.assertIn('uts', data)
+            self.assertIn('state', data)
+            if 'state' in data:
+                self.assertIn(data['state'], 'opened')
 
             await asyncio.sleep(1)
 
@@ -242,11 +259,11 @@ class TestRestUserDemoOrdersAdd(TestCase):
     """ Invalid amount format"""
     def test_user_demo_orders_add_invalid_amount_format(self):
         async def run_test():
-            market = 'bittrex'
-            pair = 'EDR_USD'
-            price = '0.25'
+            market = 'okex'
+            pair = 'ETH_BTC'
+            price = '0.015'
             amount = '100*'
-            side = 'sell'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -273,11 +290,11 @@ class TestRestUserDemoOrdersAdd(TestCase):
     """ Invalid amount zero"""
     def test_user_demo_orders_add_invalid_amount_zero(self):
         async def run_test():
-            market = 'bittrex'
-            pair = 'EDR_USD'
-            price = '0.25'
+            market = 'okex'
+            pair = 'ETH_BTC'
+            price = '0.015'
             amount = '0'
-            side = 'sell'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -289,8 +306,6 @@ class TestRestUserDemoOrdersAdd(TestCase):
             self.assertIn('time', result)
             self.assertIn('status', result)
             self.assertTrue(result['status'] == 'error')
-
-            self.assertIn('message', result)
 
             await asyncio.sleep(1)
 

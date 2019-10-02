@@ -11,7 +11,7 @@ class TestRestUserDemoOrdersCancel(TestCase):
     def test_user_demo_orders_cancel_valid_data(self):
         async def run_test():
 
-            market = 'bittrex'
+            market = 'okex'
 
             lib = BitsgapClient(public_key, private_key)
 
@@ -69,7 +69,7 @@ class TestRestUserDemoOrdersCancel(TestCase):
     def test_user_demo_orders_cancel_executed_order(self):
         async def run_test():
 
-            market = 'bittrex'
+            market = 'okex'
 
             lib = BitsgapClient(public_key, private_key)
 
@@ -114,7 +114,7 @@ class TestRestUserDemoOrdersCancel(TestCase):
     """ Cancel invalid order id """
     def test_user_demo_orders_cancel_invalid_id(self):
         async def run_test():
-            market = 'bittrex'
+            market = 'okex'
             id = 'invalid'
 
             lib = BitsgapClient(public_key, private_key)

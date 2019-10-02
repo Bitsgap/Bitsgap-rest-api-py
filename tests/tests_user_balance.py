@@ -50,7 +50,7 @@ class TestRestUserBalance(TestCase):
 
             lib = BitsgapClient(public_key, private_key)
 
-            result = lib.market_balance('bittrex')
+            result = lib.market_balance('okex')
 
             logging.debug(result)
 

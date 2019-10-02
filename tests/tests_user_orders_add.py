@@ -14,11 +14,11 @@ class TestRestUserOrdersAdd(TestCase):
     def test_user_orders_add_valid_data(self):
         async def run_test():
 
-            market = 'bittrex'
-            pair = 'EDR_USD'
-            price = '0.250'
-            amount = '150'
-            side = 'sell'
+            market = 'okex'
+            pair = 'ETH_BTC'
+            price = '0.015'
+            amount = '0.1'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -58,10 +58,10 @@ class TestRestUserOrdersAdd(TestCase):
         async def run_test():
 
             market = 'invalid_market'
-            pair = 'EDR_USD'
-            price = '0.250'
-            amount = '150'
-            side = 'sell'
+            pair = 'ETH_BTC'
+            price = '0.015'
+            amount = '0.1'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -87,11 +87,11 @@ class TestRestUserOrdersAdd(TestCase):
     """ Invalid pair """
     def test_user_orders_add_invalid_pair(self):
         async def run_test():
-            market = 'bittrex'
+            market = 'okex'
             pair = 'invalid_pair'
-            price = '0.250'
-            amount = '150'
-            side = 'sell'
+            price = '0.015'
+            amount = '0.1'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -117,10 +117,10 @@ class TestRestUserOrdersAdd(TestCase):
     """ Invalid side """
     def test_user_orders_add_invalid_side(self):
         async def run_test():
-            market = 'bittrex'
-            pair = 'EDR_USD'
-            price = '0.250'
-            amount = '150'
+            market = 'okex'
+            pair = 'ETH_BTC'
+            price = '0.015'
+            amount = '0.1'
             side = 'invalid'
             ord_type = 'limit'
 
@@ -148,11 +148,11 @@ class TestRestUserOrdersAdd(TestCase):
     def test_user_orders_add_invalid_type(self):
         async def run_test():
 
-            market = 'bittrex'
-            pair = 'EDR_USD'
-            price = '0.250'
-            amount = '150'
-            side = 'sell'
+            market = 'okex'
+            pair = 'ETH_BTC'
+            price = '0.015'
+            amount = '0.1'
+            side = 'buy'
             ord_type = 'invalid'
 
             lib = BitsgapClient(public_key, private_key)
@@ -178,11 +178,11 @@ class TestRestUserOrdersAdd(TestCase):
     """ Invalid price format """
     def test_user_orders_add_invalid_price_format(self):
         async def run_test():
-            market = 'bittrex'
-            pair = 'EDR_USD'
+            market = 'okex'
+            pair = 'ETH_BTC'
             price = '0*250'
-            amount = '150'
-            side = 'sell'
+            amount = '0.1'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -208,11 +208,11 @@ class TestRestUserOrdersAdd(TestCase):
     """ Invalid price zero """
     def test_user_orders_add_invalid_price_zero(self):
         async def run_test():
-            market = 'bittrex'
-            pair = 'EDR_USD'
+            market = 'okex'
+            pair = 'ETH_BTC'
             price = '0'
-            amount = '150'
-            side = 'sell'
+            amount = '0.1'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -238,11 +238,11 @@ class TestRestUserOrdersAdd(TestCase):
     """ Invalid price maximum """
     def test_user_orders_add_invalid_price_maximum(self):
         async def run_test():
-            market = 'bittrex'
-            pair = 'EDR_USD'
+            market = 'okex'
+            pair = 'ETH_BTC'
             price = '250000000000'
-            amount = '150'
-            side = 'sell'
+            amount = '0.1'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -268,11 +268,11 @@ class TestRestUserOrdersAdd(TestCase):
     """ Invalid amount zero """
     def test_user_orders_add_invalid_amount_zero(self):
         async def run_test():
-            market = 'bittrex'
-            pair = 'EDR_USD'
-            price = '0.25'
+            market = 'okex'
+            pair = 'ETH_BTC'
+            price = '0.015'
             amount = '0'
-            side = 'sell'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -299,11 +299,11 @@ class TestRestUserOrdersAdd(TestCase):
 
     def test_user_orders_add_invalid_amount_minimum(self):
         async def run_test():
-            market = 'bittrex'
-            pair = 'EDR_USD'
-            price = '0.25'
+            market = 'okex'
+            pair = 'ETH_BTC'
+            price = '0.015'
             amount = '0.00000001'
-            side = 'sell'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)
@@ -329,11 +329,11 @@ class TestRestUserOrdersAdd(TestCase):
     """ Invalid amount maximum """
     def test_user_orders_add_invalid_amount_maximum(self):
         async def run_test():
-            market = 'bittrex'
-            pair = 'EDR_USD'
-            price = '0.25'
+            market = 'okex'
+            pair = 'ETH_BTC'
+            price = '0.015'
             amount = '150000000000000'
-            side = 'sell'
+            side = 'buy'
             ord_type = 'limit'
 
             lib = BitsgapClient(public_key, private_key)

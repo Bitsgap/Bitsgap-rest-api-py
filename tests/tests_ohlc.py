@@ -14,8 +14,8 @@ class TestRestOhlc(TestCase):
     def test_ohlc_valid_data(self):
         async def run_test():
 
-            market = 'bittrex'
-            pair = 'EDR_USD'
+            market = 'okex'
+            pair = 'ETH_BTC'
             start = int(time.time() - 3600)
             end = int(time.time())
 
@@ -44,7 +44,7 @@ class TestRestOhlc(TestCase):
             volume = item['volume']
 
             self.assertIn('buy', volume)
-            self.assertIn('sell', volume)
+            self.assertIn('buy', volume)
 
             await asyncio.sleep(1)
 
@@ -62,7 +62,7 @@ class TestRestOhlc(TestCase):
         async def run_test():
 
             market = 'no_market'
-            pair = 'EDR_USD'
+            pair = 'ETH_BTC'
             start = int(time.time() - 3600)
             end = int(time.time())
 
@@ -90,7 +90,7 @@ class TestRestOhlc(TestCase):
     def test_ohlc_invalid_pair(self):
         async def run_test():
 
-            market = 'bittrex'
+            market = 'okex'
             pair = 'no_pair'
             start = int(time.time()) - 3600
             end = int(time.time())
@@ -119,8 +119,8 @@ class TestRestOhlc(TestCase):
     def test_ohlc_too_big_interval(self):
         async def run_test():
 
-            market = 'bittrex'
-            pair = 'EDR_USD'
+            market = 'okex'
+            pair = 'ETH_BTC'
             start = int(time.time()) - 360000
             end = int(time.time())
 
@@ -148,8 +148,8 @@ class TestRestOhlc(TestCase):
     def test_ohlc_invalid_interval_seq(self):
         async def run_test():
 
-            market = 'bittrex'
-            pair = 'EDR_USD'
+            market = 'okex'
+            pair = 'ETH_BTC'
             start = int(time.time())
             end = int(time.time()) - 3600
 

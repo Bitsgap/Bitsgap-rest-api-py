@@ -11,7 +11,7 @@ class TestRestUserDemoOrdersMove(TestCase):
     def test_user_demo_orders_move_valid_data(self):
         async def run_test():
 
-            market = 'bittrex'
+            market = 'okex'
 
             lib = BitsgapClient(public_key, private_key)
 
@@ -70,7 +70,7 @@ class TestRestUserDemoOrdersMove(TestCase):
     def test_user_demo_orders_move_invalid_executed_order(self):
         async def run_test():
 
-            market = 'bittrex'
+            market = 'okex'
 
             lib = BitsgapClient(public_key, private_key)
 
@@ -119,7 +119,7 @@ class TestRestUserDemoOrdersMove(TestCase):
     def test_user_demo_orders_move_invalid_id(self):
         async def run_test():
 
-            market = 'bittrex'
+            market = 'okex'
 
             lib = BitsgapClient(public_key, private_key)
 

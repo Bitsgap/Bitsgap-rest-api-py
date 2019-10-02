@@ -11,8 +11,8 @@ class TestRestOrderbook(TestCase):
     def test_orderbook_valid_data(self):
         async def run_test():
 
-            market = 'bittrex'
-            pair = 'EDR_USD'
+            market = 'okex'
+            pair = 'ETH_BTC'
 
             lib = BitsgapClient(public_key, private_key)
 
@@ -43,7 +43,7 @@ class TestRestOrderbook(TestCase):
         async def run_test():
 
             market = 'no_market'
-            pair = 'EDR_USD'
+            pair = 'ETH_BTC'
 
             lib = BitsgapClient(public_key, private_key)
 
@@ -67,7 +67,7 @@ class TestRestOrderbook(TestCase):
     def test_orderbook_invalid_pair(self):
         async def run_test():
 
-            market = 'bittrex'
+            market = 'okex'
             pair = 'no_pair'
 
             lib = BitsgapClient(public_key, private_key)
